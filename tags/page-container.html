@@ -1,12 +1,12 @@
 <page-container>
-	<div id="wrapper" class="{toggled: this.done}">
-		<sidebar></sidebar>
-		<page></page>
-	</div>
+  <div id="wrapper" class="{toggled: this.done}">
+    <sidebar></sidebar>
+    <page></page>
+  </div>
 
-	var self = this
-	self.opts.bus.on('toggleSidebar', function(toggle) {
-			self.done = !self.done;
-			self.update()
-		})
+  var self = this
+  self.opts.bus.on('toggleSidebar', function(toggle) {
+    self.done = !self.done;
+    self.update()
+  })
 </page-container>

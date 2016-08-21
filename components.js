@@ -1,8 +1,8 @@
 riot.tag2('hamburger', '<a class="glyphicon glyphicon-menu-hamburger navbar-brand" onclick="{toggle}"></a>', '', '', function(opts) {
 
-	this.toggle = function() {
-		this.opts.bus.trigger('toggleSidebar')
-	}.bind(this)
+  this.toggle = function() {
+    this.opts.bus.trigger('toggleSidebar')
+  }.bind(this)
 
 });
 
@@ -12,11 +12,11 @@ riot.tag2('navbar', '<nav class="navbar navbar-default navbar-static-top"> <div 
 
 riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"> <sidebar></sidebar> <page></page> </div>', '', '', function(opts) {
 
-	var self = this
-	self.opts.bus.on('toggleSidebar', function(toggle) {
-			self.done = !self.done;
-			self.update()
-		})
+  var self = this
+  self.opts.bus.on('toggleSidebar', function(toggle) {
+    self.done = !self.done;
+    self.update()
+  })
 });
 
 riot.tag2('page', '<div id="page-content-wrapper"> <h1> What up yo! </h1> </div>', '', '', function(opts) {
