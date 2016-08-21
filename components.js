@@ -22,5 +22,15 @@ riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"> <si
 riot.tag2('page', '<div id="page-content-wrapper"> <h1> What up yo! </h1> </div>', '', '', function(opts) {
 });
 
-riot.tag2('sidebar', '<div id="sidebar-wrapper"> <ul class="sidebar-nav"> <li> Item 1 </li> <li> Item 1 </li> <li> Item 1 </li> <li> Item 1 </li> </ul> </div> </div>', '', '', function(opts) {
+riot.tag2('sidebar-element', '<li> <i if="{icon_class}" class="{icon_class}"></i> <a href="{url}">{text}</a> </li>', '', '', function(opts) {
+});
+	
+
+riot.tag2('sidebar', '<div id="sidebar-wrapper"> <ul class="sidebar-nav"> <sidebar-element each="{items}" data="{this}"> </sidebar-element> </ul> </div>', '', '', function(opts) {
+
+  this.items = [
+    {url: "#", text: "Item 1" },
+    {url: "#", text: "Item 2" },
+    {url: "#", text: "Item 3" },
+  ]
 });

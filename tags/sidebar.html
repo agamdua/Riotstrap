@@ -1,11 +1,22 @@
+<sidebar-element>
+  <li>
+    <i if="{ icon_class }" class="{ icon_class }"></i>
+    <a href="{ url }">{ text }</a>
+  </li>
+</sidebar-element>
+	
+
 <sidebar>
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li> Item 1 </li>
-				<li> Item 1 </li>
-				<li> Item 1 </li>
-				<li> Item 1 </li>
-			</ul>
-		</div>
-	</div>
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <sidebar-element each="{items}" data="{this}">
+      </sidebar-element>
+    </ul>
+  </div>
+
+  this.items = [
+    {url: "#", text: "Item 1" },
+    {url: "#", text: "Item 2" },
+    {url: "#", text: "Item 3" },
+  ]
 </sidebar>
