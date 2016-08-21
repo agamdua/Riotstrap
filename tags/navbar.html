@@ -1,0 +1,26 @@
+<hamburger>
+<a class="glyphicon glyphicon-menu-hamburger navbar-brand" onclick="{ toggle }"></a>
+
+	toggle() {
+		this.opts.bus.trigger('toggleSidebar')
+	}
+
+</hamburger>
+
+
+<navbar>
+	<!-- this tag has no nehavior on its own as of now -->
+
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="navbar-header">
+			<hamburger bus="{ opts.bus }"></hamburger>
+			<a class="navbar-brand">{ opts.title }</a>
+		</div>
+	</nav>
+
+	<style>
+		/** overwriting bootstrap's default **/
+		.navbar {margin-bottom: 0px;}
+	</style>
+
+</navbar>
