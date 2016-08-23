@@ -1,0 +1,67 @@
+<!-- 
+  Table component.
+  Bunch of TODOs, but mostly "works".
+
+  These docs are cool. I probably need a docparser now.
+-->
+
+
+<rs-table>
+  <!--
+    Add documentation of public component
+  -->
+
+  <div class="col-md-7">
+    <!-- 
+      TODO:
+        1. This col/offset specification should be a riot mixin 
+        2. ....and **definitely** not hard coded ;)
+    -->
+    <table class="table {table-bordered: opts.bordered, table-striped: opts.striped}">
+      <thead riot-tag="rs-thead" headers={headers}></thead>
+      <tbody riot-tag="rs-tbody" rows={rows}></tbody>
+    </table>
+  </div>
+
+  this.headers = opts.data.headers
+  this.rows = opts.data.rows
+
+</rs-table>
+
+
+
+
+<!-- internal components -->
+
+<rs-thead>
+  <!--
+    This component must be passed as an attribute to <thead>
+    for styles to correctly apply.
+
+    This is an internal tag though so shouldn't really have
+    to use it outside <rs-table>
+
+    TODO:
+      Decide on how to namespace internal tags?
+
+    Example usage:
+      <thead riot-tag="rs-table-head" headers={opts.headers}></thead>
+  -->
+  <tr>
+    <th each="{header in opts.headers}">{header}</th>
+  </tr>
+</rs-thead>
+
+<rs-tbody>
+  <!--
+    This component must be passed as an attribute to <tbody>
+    for styles to correctly apply.
+
+    This is an internal tag though so shouldn't really have
+    to use it outside <rs-table>
+  -->
+  <tr each="{row in opts.rows}">
+    <td each="{item in row}">{item}</td>
+  </tr>
+</rs-tbody>
+  
