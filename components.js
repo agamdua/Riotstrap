@@ -10,29 +10,22 @@ riot.tag2('hamburger', '<a class="glyphicon glyphicon-menu-hamburger navbar-bran
 riot.tag2('navbar', '<nav class="navbar navbar-default navbar-static-top"><div class="navbar-header"><hamburger bus="{opts.bus}"></hamburger><a class="navbar-brand">{opts.title}</a></div></nav>', '.navbar {margin-bottom: 0px;}', '', function(opts) {
 });
 
-riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"><sidebar></sidebar><page></page></div>', '', '', function(opts) {
+riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"><sidebar data="{sidebarData}"></sidebar><page data="{pageData}"></page></div>', '', '', function(opts) {
+
+  this.pageData = opts.pageData;
+  this.sidebarData = opts.sidebarData;
 
   var self = this
   self.opts.bus.on('toggleSidebar', function(toggle) {
     self.done = !self.done;
     self.update()
   })
+
 });
 
-riot.tag2('page', '<div id="page-content-wrapper"><h3> What up, yo? </h3><rs-table data="{tableData}" bordered="true" striped="true"></rs-table></div>', '', '', function(opts) {
+riot.tag2('page', '<div id="page-content-wrapper"><h3> {opts.data.title} </h3><rs-table data="{tableData}" bordered="true" striped="true"></rs-table></div>', '', '', function(opts) {
 
-  this.tableData = {
-
-    "headers": [
-      "#", "Name", "Instrument"
-    ],
-
-    "rows": [
-      ["1", "Satch", "JS2000"],
-      ["2", "Vai", "Gem Jr"],
-      ["3", "Timmons", "Not a Fender"],
-    ]
-  }
+  this.tableData = opts.data.tableData
 });
 
 riot.tag2('sidebar-element', '<li><i if="{icon_class}" class="{icon_class}"></i><a href="{url}">{text}</a></li>', '', '', function(opts) {
@@ -41,11 +34,8 @@ riot.tag2('sidebar-element', '<li><i if="{icon_class}" class="{icon_class}"></i>
 
 riot.tag2('sidebar', '<div id="sidebar-wrapper"><ul class="sidebar-nav"><sidebar-element each="{items}" data="{this}"></sidebar-element></ul></div>', '', '', function(opts) {
 
-  this.items = [
-    {url: "#", text: "Item 1" },
-    {url: "#", text: "Item 2" },
-    {url: "#", text: "Item 3" },
-  ]
+  this.items = opts.data
+
 });
 
 

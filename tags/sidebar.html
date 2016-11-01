@@ -7,6 +7,7 @@
 	
 
 <sidebar>
+
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <sidebar-element each="{items}" data="{this}">
@@ -14,9 +15,6 @@
     </ul>
   </div>
 
-  this.items = [
-    {url: "#", text: "Item 1" },
-    {url: "#", text: "Item 2" },
-    {url: "#", text: "Item 3" },
-  ]
+  this.items = opts.data
+
 </sidebar>
