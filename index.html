@@ -21,9 +21,35 @@
   <page-container></page-container>
   
   <script>
+    tableData = {
+      "headers": ["#", "Name", "Instrument"],
+      "rows": [
+        ["1", "Satch", "JS2000"],
+        ["2", "Vai", "Gem Jr"],
+        ["3", "Timmons", "Not a Fender"],
+      ]
+    }
+
+    sidebarData = [
+      {url: "#", text: "Item 1" },
+      {url: "#", text: "Item 2" },
+      {url: "#", text: "Item 3" },
+    ]
+
     var bus = riot.observable()
 
+    // mounting components with data - this is a good enough
+    // representation of how the static site generator will consume
+    // the components however in a data-driven application the data
+    // would probably be fetched from the server.
     riot.mount('navbar', {title: "Riotstrap Admin", bus: bus})
-    riot.mount('page-container', {bus: bus})
+    riot.mount('page-container', {
+      bus: bus,
+      pageData: {
+        tableData: tableData,
+        title: "Tabular Data"
+      },
+      sidebarData: sidebarData
+    })
   </script>
 </body>

@@ -1,22 +1,11 @@
 <page>
   <div id="page-content-wrapper">
 
-    <h3> What up, yo? </h3>
+    <h3> { opts.data.title } </h3>
 
     <rs-table data="{tableData}" bordered=true striped=true>
     </rs-table>
   </div>
 
-  this.tableData = {
-
-    "headers": [
-      "#", "Name", "Instrument"
-    ],
-
-    "rows": [
-      ["1", "Satch", "JS2000"],
-      ["2", "Vai", "Gem Jr"],
-      ["3", "Timmons", "Not a Fender"],
-    ]
-  }
+  this.tableData = opts.data.tableData
 </page>
