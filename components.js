@@ -10,8 +10,9 @@ riot.tag2('hamburger', '<a class="glyphicon glyphicon-menu-hamburger navbar-bran
 riot.tag2('navbar', '<nav class="navbar navbar-default navbar-static-top"><div class="navbar-header"><hamburger bus="{opts.bus}"></hamburger><a class="navbar-brand">{opts.title}</a></div></nav>', '.navbar {margin-bottom: 0px;}', '', function(opts) {
 });
 
-riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"><sidebar data="{sidebarData}"></sidebar><page data="{pageData}"></page></div>', '', '', function(opts) {
+riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"><sidebar data="{sidebarData}" sidebarevents="{sidebarevents}"></sidebar><page data="{pageData}" sidebarevents="{sidebarevents}"><table-page></table-page></page></div>', '', '', function(opts) {
 
+  this.sidebarevents = riot.observable();
   this.pageData = opts.pageData;
   this.sidebarData = opts.sidebarData;
 
@@ -23,17 +24,32 @@ riot.tag2('page-container', '<div id="wrapper" class="{toggled: this.done}"><sid
 
 });
 
-riot.tag2('page', '<div id="page-content-wrapper"><h3> {opts.data.title} </h3><rs-table data="{tableData}" bordered="true" striped="true"></rs-table></div>', '', '', function(opts) {
+riot.tag2('page', '<div id="page-content-wrapper"><yield></yield></div>', '', '', function(opts) {
 
-  this.tableData = opts.data.tableData
+  var self = this
+
+  self.opts.sidebarevents.on('routeTo', function(event, url) {
+    console.log("supposedly triggered a mount");
+  })
 });
 
-riot.tag2('sidebar-element', '<li><i if="{icon_class}" class="{icon_class}"></i><a href="{url}">{text}</a></li>', '', '', function(opts) {
+riot.tag2('table-page', '<h3> {title} </h3><rs-table data="{tableData}" bordered="true" striped="true"></rs-table>', '', '', function(opts) {
+
+  this.title = this.parent.opts.data.title
+  this.tableData = this.parent.opts.data.tableData
+});
+
+riot.tag2('sidebar-element', '<li onclick="{routeTo}"><i if="{icon_class}" class="{icon_class}"></i><a>{text}</a></li>', '', '', function(opts) {
+
+  this.routeTo = function(e) {
+    this.parent.sidebarevents.trigger('routeTo', {url: this.url})
+  }.bind(this)
 });
 	
 
 riot.tag2('sidebar', '<div id="sidebar-wrapper"><ul class="sidebar-nav"><sidebar-element each="{items}" data="{this}"></sidebar-element></ul></div>', '', '', function(opts) {
 
+  this.sidebarevents = opts.sidebarevents
   this.items = opts.data
 
 });
@@ -58,4 +74,3 @@ riot.tag2('rs-thead', '<tr><th each="{header in opts.headers}">{header}</th></tr
 
 riot.tag2('rs-tbody', '<tr each="{row in opts.rows}"><td each="{item in row}">{item}</td></tr>', '', '', function(opts) {
 });
-  

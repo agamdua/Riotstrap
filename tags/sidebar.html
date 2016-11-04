@@ -1,8 +1,12 @@
 <sidebar-element>
-  <li>
+  <li onclick="{ routeTo }">
     <i if="{ icon_class }" class="{ icon_class }"></i>
-    <a href="{ url }">{ text }</a>
+    <a>{ text }</a>
   </li>
+
+  routeTo(e) {
+    this.parent.sidebarevents.trigger('routeTo', {url: this.url})
+  }
 </sidebar-element>
 	
 
@@ -15,6 +19,7 @@
     </ul>
   </div>
 
+  this.sidebarevents = opts.sidebarevents
   this.items = opts.data
 
 </sidebar>

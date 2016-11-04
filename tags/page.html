@@ -1,11 +1,23 @@
 <page>
-  <div id="page-content-wrapper">
 
-    <h3> { opts.data.title } </h3>
+  <div id="page-content-wrapper">
+    <yield/>
+  </div>
+
+  var self = this
+
+  self.opts.sidebarevents.on('routeTo', function(event, url) {
+    console.log("supposedly triggered a mount");
+  })
+</page>
+
+<table-page>
+
+    <h3> { title } </h3>
 
     <rs-table data="{tableData}" bordered=true striped=true>
     </rs-table>
-  </div>
 
-  this.tableData = opts.data.tableData
-</page>
+  this.title = this.parent.opts.data.title
+  this.tableData = this.parent.opts.data.tableData
+</table-page>
