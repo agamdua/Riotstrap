@@ -21,7 +21,7 @@ mount time.
 Install riot - I use the `npm` version which is installed
 globally:
 
-`npm instal -g riot`
+`npm install -g riot`
 
 
 ### Running the project
