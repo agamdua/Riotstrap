@@ -1,10 +1,13 @@
 <page-container>
 
   <div id="wrapper" class="{toggled: this.done}">
+
     <sidebar data="{sidebarData}" sidebarevents="{sidebarevents}"></sidebar>
+
     <page data="{pageData}" sidebarevents="{sidebarevents}">
-      <table-page></table-page>
+      <div id="page-content"></div>
     </page>
+
   </div>
 
   this.sidebarevents = riot.observable();
@@ -12,9 +15,39 @@
   this.sidebarData = opts.sidebarData;
 
   var self = this
+
+  // react to sidebar toggling
   self.opts.bus.on('toggleSidebar', function(toggle) {
     self.done = !self.done;
     self.update()
+  })
+
+  // if this is the first load then the current view is not defined
+  self.currentView = null
+
+
+  // this loads the page content inside the page container
+  loadView(viewName) {
+    if (self.currentView) {
+      self.currentView.unmount(true)
+    }
+
+    console.log(viewName)
+    console.log(self.pageData.tableData)
+    self.currentView = riot.mount('div#page-content', viewName, self.pageData.tableData)[0]
+    console.log(self.currentView)
+  }
+
+  studyRoute(view) {
+    self.loadView('rs-table')
+  }
+
+  // we pass a callable that handles our routing
+  // for the page content routing
+  riot.route(self.studyRoute)
+
+  self.on('mount', function() {
+    riot.route.start(true)
   })
 
 </page-container>

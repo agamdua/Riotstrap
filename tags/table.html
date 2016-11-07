@@ -5,30 +5,30 @@
   These docs are cool. I probably need a docparser now.
 -->
 
-
 <rs-table>
   <!--
     Add documentation of public component
   -->
-
   <div class="col-md-7">
-    <!-- 
+    <!--
       TODO:
-        1. This col/offset specification should be a riot mixin 
+        1. This col/offset specification should be a project specific mixin
         2. ....and **definitely** not hard coded ;)
-    -->
-    <table class="table {table-bordered: opts.bordered, table-striped: opts.striped}">
+
+        The same needs to be done with the css properties of the table class
+        below, it'll work for now because we're defaulting to true, but this
+        is far from reusable.
+     -->
+    <table class="table {table-bordered: opts.bordered || true, table-striped: opts.striped || true}">
       <thead riot-tag="rs-thead" headers={headers}></thead>
       <tbody riot-tag="rs-tbody" rows={rows}></tbody>
     </table>
   </div>
 
-  this.headers = opts.data.headers
-  this.rows = opts.data.rows
+  this.headers = opts.headers
+  this.rows = opts.rows
 
 </rs-table>
-
-
 
 
 <!-- internal components -->
